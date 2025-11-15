@@ -4,13 +4,12 @@ import os
 
 START_SYMBOL = "CÂU"
 
-# ---------------------------------------
-# Load grammar
-# ---------------------------------------
+
+# Tải văn phạm
 grammar = {}
 GRAMMAR_PATH = os.path.join("output", "grammar.txt")
 if not os.path.exists(GRAMMAR_PATH):
-    raise FileNotFoundError(f"Grammar file not found: {GRAMMAR_PATH}")
+    raise FileNotFoundError(f"Không tìm thấy file văn phạm: {GRAMMAR_PATH}")
 
 with open(GRAMMAR_PATH, "r", encoding="utf8") as f:
     for line in f:
@@ -23,9 +22,8 @@ with open(GRAMMAR_PATH, "r", encoding="utf8") as f:
             rights = [r.strip() for r in right.split("|")]
             grammar[left] = [r.split() for r in rights]
 
-# ---------------------------------------
-# Parser with memoization
-# ---------------------------------------
+
+# Bộ phân tích cú pháp với ghi nhớ
 @lru_cache(maxsize=None)
 def parse_at(symbol, pos, tokens_tuple):
     tokens = list(tokens_tuple)
@@ -37,14 +35,14 @@ def parse_at(symbol, pos, tokens_tuple):
 
     results = []
 
-    # terminal
+    # ký hiệu kết thúc
     if symbol.startswith('"') and symbol.endswith('"'):
         term = symbol.strip('"')
         if pos < N and tokens[pos] == term:
             return [(pos + 1, [(term, [])])]
         return []
 
-    # non-terminal
+    # ký hiệu không kết thúc
     rules = grammar.get(symbol, [])
     if not rules:
         return []
@@ -62,7 +60,7 @@ def parse_at(symbol, pos, tokens_tuple):
                 partials = new_partials
                 continue
 
-            # terminal in quotes
+            # ký hiệu kết thúc trong dấu ngoặc kép
             if part.startswith('"') and part.endswith('"'):
                 term = part.strip('"')
                 for (p, kids) in partials:
@@ -75,7 +73,7 @@ def parse_at(symbol, pos, tokens_tuple):
                     break
                 continue
 
-            # non-terminal
+            # ký hiệu không kết thúc
             for (p, kids) in partials:
                 subres = parse_at(part, p, tokens_tuple)
                 for (endp, subtree) in subres:
@@ -95,14 +93,13 @@ def parse_at(symbol, pos, tokens_tuple):
 def parse(tokens, symbol=START_SYMBOL, pos=0):
     return parse_at(symbol, pos, tuple(tokens))
 
-# ---------------------------------------
-# Format as ASCII tree
-# ---------------------------------------
+
+# Định dạng cây ASCII
 def format_ascii_tree(node, prefix=""):
     """
-    node: (name, children)
-    prefix: string to align
-    returns: string representation of tree
+    node: (tên, các con)
+    prefix: chuỗi để căn chỉnh
+    returns: biểu diễn chuỗi của cây
     """
     name, children = node
     if not children:
@@ -117,15 +114,13 @@ def format_ascii_tree(node, prefix=""):
             child_prefix = prefix + "├── "
             sub_prefix = prefix + "│   "
         lines.append(format_ascii_tree(child, child_prefix))
-        # Fix indentation for grand-children
+        # Sửa lỗi thụt lề cho các cháu
         if child[1]:
-            # append recursively with updated sub_prefix
+            # thêm đệ quy với sub_prefix đã cập nhật
             lines[-1] = lines[-1].replace(child_prefix, child_prefix)
     return "\n".join(lines)
 
-# ---------------------------------------
-# Build tree
-# ---------------------------------------
+# Xây dựng cây
 def build_tree(sentence):
     tokens = sentence.strip().split()
     if not tokens:
@@ -135,7 +130,7 @@ def build_tree(sentence):
     if not results:
         return "()"
 
-    # pick parse consuming most tokens
+    # chọn phân tích cú pháp tiêu thụ nhiều token nhất
     results = sorted(results, key=lambda x: x[0], reverse=True)
     endpos, tree = results[0]
 
@@ -145,14 +140,12 @@ def build_tree(sentence):
     root = (START_SYMBOL, tree)
     return format_ascii_tree(root)
 
-# ---------------------------------------
-# Process input/sentences.txt -> output/parse-results.txt
-# ---------------------------------------
+# Xử lý sentences.txt -> parse-results.txt
 IN_PATH = os.path.join("input", "sentences.txt")
 OUT_PATH = os.path.join("output", "parse-results.txt")
 
 if not os.path.exists(IN_PATH):
-    raise FileNotFoundError(f"Input sentences file not found: {IN_PATH}")
+    raise FileNotFoundError(f"Không tìm thấy file câu đầu vào: {IN_PATH}")
 
 os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
 
@@ -162,5 +155,3 @@ with open(IN_PATH, "r", encoding="utf8") as f:
 with open(OUT_PATH, "w", encoding="utf8") as out:
     for s in sentences:
         out.write(build_tree(s) + "\n\n")
-
-print(f"Parsing finished. Output written to: {OUT_PATH}")
