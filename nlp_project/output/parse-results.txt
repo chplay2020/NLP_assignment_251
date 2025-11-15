@@ -1,0 +1,32 @@
+(GIAO) → giao hàng (THỜI_GIAN_GIAO) → vào lúc (SỐ → 9) giờ
+(THÊM) → thêm (SỐ_LƯỢNG) → (SỐ → 7) ĐƠN_VỊ (MÓN → (ĐỒ_UỐNG) → nước ngọt) (TÙY_ĐƠN) → vào đơn
+(GIAO) → giao hàng (THỜI_GIAN_GIAO) → lúc (SỐ → 8) giờ
+(HỎI) → có (MÓN → (ĐỒ_UỐNG) → nước ngọt) không
+(HỎI) → có (MÓN → (ĐỒ_UỐNG) → nước ngọt) không
+(GIAO) → giao hàng (THỜI_GIAN_GIAO) → vào lúc (SỐ → 2) giờ
+(THÊM) → thêm (SỐ_LƯỢNG) → (SỐ → 1) ĐƠN_VỊ (MÓN → (THỊT) → gà rán) (TÙY_ĐƠN) → vào đơn
+(ĐỔI) → thay đổi số lượng (MÓN → (THỊT → heo)) thành (SỐ → 5)
+(ĐẶT) → tôi muốn đặt (SỐ_LƯỢNG) → (SỐ → 8) (ĐƠN_VỊ → tô) (MÓN → (THỊT → bò)) TÙY_GIAO_THỜI
+(HỦY) → tôi muốn hủy (MÓN → (ĐỒ_UỐNG) → nước ngọt) trong đơn hàng
+(GIAO) → giao hàng (THỜI_GIAN_GIAO) → lúc (SỐ → 7) giờ
+(THÊM) → thêm (SỐ_LƯỢNG) → (SỐ → 10) (ĐƠN_VỊ → phần) (MÓN → (THỊT → bò)) TÙY_ĐƠN
+(ĐỔI) → thay đổi số lượng (MÓN → (ĐỒ_UỐNG) → nước ngọt) thành (SỐ → 8)
+(ĐỔI) → thay đổi số lượng (MÓN → (THỊT → heo)) thành (SỐ → 2)
+(THÊM) → thêm (SỐ_LƯỢNG) → (SỐ → 8) (ĐƠN_VỊ → ly) (MÓN → (THỊT) → gà rán) (TÙY_ĐƠN) → vào đơn
+(ĐỔI) → thay đổi số lượng (MÓN → (THỊT → heo)) thành (SỐ → 4)
+(THÊM) → thêm (SỐ_LƯỢNG) → (SỐ → 5) (ĐƠN_VỊ → ly) (MÓN → (MÌ_PHA) → hủ tiếu THỊT_TÙY) TÙY_ĐƠN
+(GIAO) → giao hàng (THỜI_GIAN_GIAO) → lúc (SỐ → 4) giờ
+(HỦY) → tôi muốn hủy (MÓN → (ĐỒ_UỐNG) → nước ngọt) trong đơn hàng
+(HỎI) → có (MÓN → (THỊT → bò)) không
+(GIAO) → giao hàng (THỜI_GIAN_GIAO) → lúc (SỐ → 9) giờ
+(GIAO) → giao hàng (THỜI_GIAN_GIAO) → vào lúc (SỐ → 1) giờ
+()
+()
+()
+()
+()
+()
+()
+(HỎI) → có (MÓN → (THỊT → bò)) không
+(ĐỔI) → thay đổi số lượng (MÓN → (THỊT) → gà rán) thành (SỐ → 4)
+(THÊM) → thêm (SỐ_LƯỢNG) → (SỐ → 3) (ĐƠN_VỊ → tô) (MÓN → (MÌ_PHA) → mì THỊT_TÙY) (TÙY_ĐƠN) → vào đơn

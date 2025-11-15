@@ -1,0 +1,52 @@
+CÂU -> ĐẶT | HỎI | THÊM | HỦY | ĐỔI | GIAO
+
+# ====== ĐẶT (ORDER) ======
+# Cho phép: tôi muốn đặt <SỐ_LƯỢNG> <MÓN> [giao] [THỜI_GIAN_GIAO]
+ĐẶT -> "tôi" "muốn" "đặt" SỐ_LƯỢNG MÓN TÙY_GIAO_THỜI
+
+# Tùy chọn có thể có chữ "giao" đứng trước thời gian
+TÙY_GIAO_THỜI -> "giao" THỜI_GIAN_GIAO | THỜI_GIAN_GIAO | ε
+# Ví dụ: "giao lúc 12 giờ" hoặc "lúc 12 giờ" hoặc không có
+
+# ====== HỎI (ASK) ======
+HỎI -> "có" MÓN "không"
+
+# ====== THÊM (ADD) ======
+THÊM -> "thêm" SỐ_LƯỢNG MÓN TÙY_ĐƠN
+TÙY_ĐƠN -> "vào" "đơn" | ε
+
+# ====== HỦY (REMOVE) ======
+HỦY -> "tôi" "muốn" "hủy" MÓN "trong" "đơn" "hàng"
+
+# ====== ĐỔI (CHANGE) ======
+ĐỔI -> "thay" "đổi" "số" "lượng" MÓN "thành" SỐ
+
+# ====== GIAO (DELIVERY) ======
+GIAO -> "giao" "hàng" THỜI_GIAN_GIAO
+THỜI_GIAN_GIAO -> "lúc" SỐ "giờ" | "vào" "lúc" SỐ "giờ"
+
+# ====== CHUNG (COMMON) ======
+SỐ_LƯỢNG -> SỐ ĐƠN_VỊ
+ĐƠN_VỊ -> "phần" | "ly" | "tô" | ε
+
+# MÓN có thể là nhiều dạng: base mì có thể kèm thịt (phở bò), hoặc các từ kết hợp
+MÓN -> MÌ_PHA | MÌ | THỊT | ĐỒ_UỐNG
+
+# MÌ_PHA: mì kèm thịt như "phở bò", "bún chả" (tùy ngữ liệu)
+MÌ_PHA -> "phở" THỊT_TÙY | "bún" "chả" | "bún" THỊT_TÙY | "mì" THỊT_TÙY | "hủ" "tiếu" THỊT_TÙY
+THỊT_TÙY -> "bò" | "gà" | "heo" | ε
+
+# MÌ riêng lẻ (không kèm modifier)
+MÌ -> "phở" | "bún" | "mì" | "hủ" "tiếu"
+
+# THỊT (các mục là multiword e.g. "gà rán")
+THỊT -> "gà" "rán" | "bò" | "heo"
+
+# ĐỒ UỐNG
+ĐỒ_UỐNG -> "trà" "sữa" | "nước" "ngọt"
+
+# SỐ (đơn giản)
+SỐ -> "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10"
+
+# Epsilon token (nếu cần ghi rõ)
+ε -> ε
